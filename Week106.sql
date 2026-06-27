@@ -5,7 +5,9 @@
 -- 今週のテーマは、Snowflakeの動的データマスキング機能を活用して、ユーザーの役割に基づいて機密情報を保護することです。
 
 -- 貴社SecureDataCorpは先日、セキュリティ監査を受け、機密性の高い顧客情報を保護するためのデータマスキング手法の改善が必要であることが明らかになりました。
--- 監査の結果、クレジットカード番号、メールアドレス、口座残高などの機密データが、適切な権限を持たないユーザーにもアクセス可能になっていたことが判明しました。貴社の任務は、Snowflakeのダイナミックデータマスキングを実装し、権限のあるユーザーのみが機密情報を閲覧でき、それ以外のユーザーにはマスキングされたデータのみが表示されるようにすることです。
+-- 監査の結果、クレジットカード番号、メールアドレス、口座残高などの機密データが、適切な権限を持たないユーザーにもアクセス可能になっていたことが判明しました。
+-- 貴社の任務は、Snowflakeのダイナミックデータマスキングを実装し、権限のあるユーザーのみが機密情報を閲覧でき、
+-- それ以外のユーザーにはマスキングされたデータのみが表示されるようにすることです。
 
 -- ============================================================
 -- 初期設定
@@ -14,6 +16,7 @@
 CREATE DATABASE dynamic_data_masking_db;
 USE DATABASE dynamic_data_masking_db;
 
+-- テーブル作成
 CREATE TABLE customer_data (
     customer_id INTEGER,
     name STRING,
@@ -24,6 +27,7 @@ CREATE TABLE customer_data (
     account_balance FLOAT
 );
 
+-- データ投入
 INSERT INTO customer_data (customer_id, name, email, phone, address, credit_card_number, account_balance) VALUES
     (1, 'John Doe', 'john.doe@example.com', '123-456-7890', '123 Main St', '4111111111111111', 15000.00),
     (2, 'Jane Smith', 'jane.smith@example.com', '234-567-8901', '456 Elm St', '4222222222222222', 8500.00),
